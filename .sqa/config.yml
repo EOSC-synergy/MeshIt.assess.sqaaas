@@ -1,0 +1,52 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/bloech/MeshIt:
+      branch: master
+      repo: https://github.com/bloech/MeshIt
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/bloech/MeshIt git:
+        commands:
+        - /usr/bin/env sh .sqa/script.skimpy-auburn-bird.sh
+        container: qc.acc_wheezy-bronze-bison
+  QC.Doc:
+    repos:
+      github.com/bloech/MeshIt find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.messy-emerald-caterpillar.sh
+        container: qc.doc_messy-azure-bombay
+      github.com/bloech/MeshIt git:
+        commands:
+        - /usr/bin/env sh .sqa/script.greasy-lilac-butterfly.sh
+        container: qc.doc_sleazy-sepia-warthog
+      github.com/bloech/MeshIt markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.sickly-wheat-earwig.sh
+        container: qc.doc_scaly-malachite-crocodile
+  QC.Lic:
+    repos:
+      github.com/bloech/MeshIt licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.slaphappy-wisteria-wombat.sh
+        container: qc.lic_breezy-dandelion-leopard
+  QC.Sty:
+    repos:
+      github.com/bloech/MeshIt oclint:
+        commands:
+        - /usr/bin/env sh .sqa/script.randy-carmine-duck.sh
+        container: qc.sty_foggy-bronze-ragdoll
+  QC.Ver:
+    repos:
+      github.com/bloech/MeshIt get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.freaky-silver-fly.sh
+        container: qc.ver_gamy-dandelion-meerkat
+timeout: 5400
